@@ -1,0 +1,13 @@
+<div fxLayout="column" fxLayoutAlign="start stretch">
+  <mat-form-field [formGroup]="form">
+    <mat-select placeholder="Formula" formControlName="formula">
+      <mat-option value="none">None</mat-option>
+      <mat-option *ngFor="let formula of formulas | async" [value]="formula.name">{{formula.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <app-number-field [form]="form" field="kcal" placeholder="Energy" units="kcal/ml"></app-number-field>
+  <app-number-field [form]="form" field="carbs" placeholder="Carbs" units="%"></app-number-field>
+  <app-number-field [form]="form" field="protein" placeholder="Protein" units="%"></app-number-field>
+  <app-number-field [form]="form" field="lipids" placeholder="Lipids" units="%"></app-number-field>
+  <app-number-field [form]="form" field="freeWater" placeholder="Free Water" units="%"></app-number-field>
+</div>

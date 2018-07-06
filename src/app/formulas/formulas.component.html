@@ -1,0 +1,15 @@
+<app-page [pageTitle]="typeName + ' Formulas'">
+  <page-body>
+    <mat-list>
+      <mat-list-item *ngFor="let formula of formulas$ | async" [class]="formula.type">
+        <p matListAvatar>
+          {{formula.type.substring(0, 1)}}
+        </p>
+        <h3 matLine>{{formula.name}}</h3>
+        <p matLine>
+          kcal: {{formula.kcal}}, carbs: {{formula.carbs}}, protein: {{formula.protein}}, lipids: {{formula.lipids}}
+        </p>
+      </mat-list-item>
+    </mat-list>
+  </page-body>
+</app-page>

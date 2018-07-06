@@ -1,0 +1,58 @@
+<app-page pageTitle="Energy Equations" [formGroup]="form">
+  <page-body>
+    <app-section-card cardTitle="Patient Information" [fxShow]="!hasResults">
+      <div class="param-field">
+        <mat-label for="gender">Gender</mat-label>
+        <mat-radio-group id="gender" fxLayout="column" fxLayoutGap="10px" formControlName="gender">
+          <mat-radio-button value="M">Male</mat-radio-button>
+          <mat-radio-button value="F">Female</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <div class="param-field" fxLayout="column">
+        <mat-form-field>
+          <input matInput type="number" placeholder="Age" formControlName="age_yrs" />
+        </mat-form-field>
+      </div>
+
+      <div class="param-field" fxLayout="column">
+        <mat-form-field>
+          <input matInput type="number" placeholder="Weight (kg)" formControlName="weight_kg" />
+        </mat-form-field>
+      </div>
+
+      <div class="param-field" fxLayout="column">
+        <mat-form-field>
+          <input matInput type="number" placeholder="Height (cm)" formControlName="height_cm" />
+        </mat-form-field>
+      </div>
+
+      <div class="param-field" fxLayout="column">
+        <mat-form-field>
+          <input matInput type="number" placeholder="Ventilation (l/min)" formControlName="ventilation_lmin" />
+        </mat-form-field>
+      </div>
+
+      <div class="param-field" fxLayout="column">
+        <mat-form-field>
+          <input matInput type="number" placeholder="Max Body Temp (last 24h)" formControlName="tmax_c" />
+        </mat-form-field>
+      </div>
+    </app-section-card>
+    <app-section-card cardTitle="Results" class="push-bottom push-top" *ngIf="hasResults" fxFlex="100">
+      <mat-list *ngFor="let section of results">
+        <h3 mat-subheader class="accent-color">{{section.name}}</h3>
+        <mat-list-item *ngFor="let item of section.items">
+          <span fxFlex>{{item.name}}</span>
+          <span>{{item.value}}</span>
+        </mat-list-item>
+      </mat-list>
+    </app-section-card>
+  </page-body>
+  <page-actions fxLayout="row" fxLayoutAlign="center center">
+    <button *ngIf="!hasResults" mat-button fxFlex="40" (click)="reset()">Clear</button>
+    <button *ngIf="!hasResults" mat-raised-button fxFlex="60" color="primary" (click)="calc()">Calculate</button>
+    <button *ngIf="hasResults" mat-button (click)="restart(false)" fxFlex="50">Modify</button>
+    <button *ngIf="hasResults" mat-raised-button (click)="restart(true)" fxFlex="50" color="primary">Restart</button>
+  </page-actions>
+</app-page>

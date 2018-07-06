@@ -1,0 +1,63 @@
+@import "~@angular/material/theming";
+body {
+  padding: 0;
+  margin: 0;
+}
+
+.mat-select-panel {
+    background-color: #f0f0f0;
+    opacity: 1;
+  }
+
+.text-center {
+  text-align: center;
+}
+
+.push-top {
+  margin-top: 5px;
+}
+
+.push-bottom {
+  margin-bottom: 5px;
+}
+
+/***
+* Theming
+* 
+*/
+
+@include mat-core();
+@mixin custom_theming($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+  .primary-color {
+    color: mat-color($primary, 1);
+  }
+  .accent-color {
+    color: mat-color($accent, 1);
+  }
+  .primary-bg-color {
+    background-color: mat-color($primary, 1);
+  }
+  .accent-800 {
+    background-color: mat-color($accent, 800);
+    color: mat-contrast($accent, 800);
+  }
+  .primary-800 {
+    background-color: mat-color($primary, 800);
+    color: mat-contrast($primary, 800);
+  }
+}
+
+$default-theme-primary: mat-palette($mat-blue, 800, 500, 900);
+$default-theme-accent: mat-palette($mat-deep-orange, 600);
+$default-theme-warn: mat-palette($mat-red, A200);
+// light theme
+$default-light-theme: mat-light-theme( $default-theme-primary, $default-theme-accent, $default-theme-warn);
+.default-light-theme {
+  @include angular-material-theme($default-light-theme);
+  @include custom_theming($default-light-theme);
+}

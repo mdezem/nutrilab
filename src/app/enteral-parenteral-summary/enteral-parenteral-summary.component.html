@@ -1,0 +1,146 @@
+<app-page pageTitle="E/P Nutrition Summary">
+  <page-body>
+    <mat-vertical-stepper linear="true">
+      <mat-step label="Patient Information">
+        <app-patient-info-form>
+        </app-patient-info-form>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </mat-step>
+      <mat-step label="Enteral Nutrition">
+        <div fxLayout="column" [formGroup]="enteralForm">
+          <app-formula-info-form formulaType="E">
+          </app-formula-info-form>
+          <app-number-field [form]="enteralForm" field="rate" placeholder="Rate" units="ml/h">
+          </app-number-field>
+          <mat-form-field>
+            <mat-select placeholder='Duration' formControlName="duration">
+              <mat-option value="24">24 hrs</mat-option>
+              <mat-option value="22">22 hrs</mat-option>
+              <mat-option value="20">20 hrs</mat-option>
+              <mat-option value="18">18 hrs</mat-option>
+              <mat-option value="12">12 hrs</mat-option>
+              <mat-option value="8">8 hrs</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div fxLayout="row" fxLayoutGap="15px">
+            <app-number-field [form]="enteralForm" field="freeWater" placeholder="Free water flush" units="ml">
+            </app-number-field>
+            <mat-form-field>
+              <mat-select placeholder="Free Water Flush Rate/Frequency" formControlName="freeWaterUnit">
+                <mat-option value="1">ml/h</mat-option>
+                <mat-option value="2">2hr</mat-option>
+                <mat-option value="4">4hr</mat-option>
+                <mat-option value="6">6hr</mat-option>
+                <mat-option value="8">8hr</mat-option>
+                <mat-option value="12">12hr</mat-option>
+                <mat-option value="24">24hr</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <app-number-field [form]="enteralForm" field="protein" placeholder="Protein supplement" units="g/day">
+          </app-number-field>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+
+        </div>
+      </mat-step>
+      <mat-step label="Parenteral Nutrition">
+        <div fxLayout="column" [formGroup]="parenteralForm">
+          <app-number-field [form]="parenteralForm" field="totalVolume" placeholder="Total Volume" units="ml">
+          </app-number-field>
+          <app-number-field [form]="parenteralForm" field="rate" placeholder="Rate" units="ml/h">
+          </app-number-field>
+          <mat-form-field>
+            <mat-select placeholder='Duration' formControlName="duration">
+              <mat-option value="24">24 hrs</mat-option>
+              <mat-option value="22">22 hrs</mat-option>
+              <mat-option value="20">20 hrs</mat-option>
+              <mat-option value="18">18 hrs</mat-option>
+              <mat-option value="12">12 hrs</mat-option>
+              <mat-option value="8">8 hrs</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <app-formula-info-form formulaType="P">
+          </app-formula-info-form>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </div>
+      </mat-step>
+      <mat-step label="Results">
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button color="accent" matStepperNext>Reset</button>
+        </div>
+      </mat-step>
+    </mat-vertical-stepper>
+    <div style="display: none">
+      <app-section-card cardTitle="Patient Information">
+        <app-patient-info-form>
+        </app-patient-info-form>
+      </app-section-card>
+      <app-section-card cardTitle="Enteral Nutrition" [formGroup]="enteralForm">
+        <div fxLayout="column">
+          <app-formula-info-form formulaType="E">
+          </app-formula-info-form>
+          <app-number-field [form]="enteralForm" field="rate" placeholder="Rate" units="ml/h">
+          </app-number-field>
+          <mat-form-field>
+            <mat-select placeholder='Duration' formControlName="duration">
+              <mat-option value="24">24 hrs</mat-option>
+              <mat-option value="22">22 hrs</mat-option>
+              <mat-option value="20">20 hrs</mat-option>
+              <mat-option value="18">18 hrs</mat-option>
+              <mat-option value="12">12 hrs</mat-option>
+              <mat-option value="8">8 hrs</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div fxLayout="row" fxLayoutGap="15px">
+            <app-number-field [form]="enteralForm" field="freeWater" placeholder="Free water flush" units="ml">
+            </app-number-field>
+            <mat-form-field>
+              <mat-select placeholder="Free Water Flush Rate/Frequency" formControlName="freeWaterUnit">
+                <mat-option value="1">ml/h</mat-option>
+                <mat-option value="2">2hr</mat-option>
+                <mat-option value="4">4hr</mat-option>
+                <mat-option value="6">6hr</mat-option>
+                <mat-option value="8">8hr</mat-option>
+                <mat-option value="12">12hr</mat-option>
+                <mat-option value="24">24hr</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <app-number-field [form]="enteralForm" field="protein" placeholder="Protein supplement" units="g/day">
+          </app-number-field>
+        </div>
+      </app-section-card>
+      <app-section-card cardTitle="Parenteral Nutrition" [formGroup]="parenteralForm">
+        <div fxLayout="column">
+          <app-number-field [form]="parenteralForm" field="totalVolume" placeholder="Total Volume" units="ml">
+          </app-number-field>
+          <app-number-field [form]="parenteralForm" field="rate" placeholder="Rate" units="ml/h">
+          </app-number-field>
+          <mat-form-field>
+            <mat-select placeholder='Duration' formControlName="duration">
+              <mat-option value="24">24 hrs</mat-option>
+              <mat-option value="22">22 hrs</mat-option>
+              <mat-option value="20">20 hrs</mat-option>
+              <mat-option value="18">18 hrs</mat-option>
+              <mat-option value="12">12 hrs</mat-option>
+              <mat-option value="8">8 hrs</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <app-formula-info-form formulaType="P">
+          </app-formula-info-form>
+        </div>
+      </app-section-card>
+    </div>
+  </page-body>
+</app-page>

@@ -1,0 +1,43 @@
+.page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.page-footer, .page-actions {
+  flex-grow: 0;
+  display: block;
+  z-index: 1001;
+}
+
+.page-header {
+  flex-grow: 0;
+  display: block;
+  z-index: 1001;
+}
+
+.page-content-wrapper {
+  display: block;
+  z-index: 1000;
+  overflow: hidden;
+  padding-bottom: 100px;
+}
+
+.page-content {
+   overflow-y: auto;
+}
+
+.page-header-content:empty {
+    display: none;
+}
+
+.page-actions {
+    background-color: #eee;
+}
+
+.page-actions /deep/ button {
+    border-radius: 0 !important;
+    padding: 10px;
+}

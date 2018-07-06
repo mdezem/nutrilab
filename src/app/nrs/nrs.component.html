@@ -1,0 +1,86 @@
+<app-page pageTitle="NRS 2002" class="nrs-page" [formGroup]="form">
+  <div *ngIf="score < 0">
+    <app-section-card cardTitle="Initial Screening">
+      <div fxLayout="column" fxLayoutGap="10px">
+        <section class="survey-question">
+          <mat-checkbox name="older_than_70" color="accent" formControlName="olderThan70">
+            The patient is older than 70 years old.
+          </mat-checkbox>
+        </section>
+        <section class="survey-question push-top">
+          <mat-checkbox name="pre_screening" formControlName="preScreening">
+            The answer is
+            <strong>yes</strong> for at least one of the questions below.
+          </mat-checkbox>
+          <mat-list>
+            <mat-list-item>
+              <span mat-line>Is BMI less than 20.5?</span>
+              <a mat-button routerLink="/bmi" class="mat-secondary">Calcular BMI</a>
+            </mat-list-item>
+            <mat-list-item>Has the patient lost weight within the last 3 months?</mat-list-item>
+            <mat-list-item>Has the patient had a reduced dietary intake in the last week?</mat-list-item>
+            <mat-list-item>Is the partient severely ill? (e.g in intensive terapy)</mat-list-item>
+          </mat-list>
+        </section>
+      </div>
+    </app-section-card>
+    <app-section-card cardTitle="Impaired Nutritional Status">
+      <mat-radio-group name="nutr_status" fxLayout="column" class="survey-question" formControlName="nutritionalStatus">
+        <div *ngFor="let status of nutrStatusList" class="push-bottom">
+          <mat-radio-button [value]="status.value" name="imp_nutr_status">{{status.label}}</mat-radio-button>
+          <ul class="push-bottom">
+            <li *ngFor="let line of status.text">{{line}}</li>
+          </ul>
+        </div>
+      </mat-radio-group>
+    </app-section-card>
+    <app-section-card cardTitle="Severity of Disease">
+      <mat-radio-group name="disease_severity" fxLayout="column" class="survey-question" formControlName="diseaseSeverity">
+        <div *ngFor="let severity of severityList" class="push-bottom">
+          <mat-radio-button [value]="severity.value">{{severity.label}}</mat-radio-button>
+          <ul class="push-bottom">
+            <li *ngFor="let line of severity.text">{{line}}</li>
+          </ul>
+        </div>
+      </mat-radio-group>
+    </app-section-card>
+  </div>
+  <app-section-card *ngIf="score >= 0" cardTitle="Nutritional Risk Score">
+      <div fxLayout="row" fxLayoutAlign="center">
+        <mat-card fxFlex="50" fxFlex.lt-sm="100" class="accent-bg-color">
+          <mat-card-content>
+            <div class="mat-display-4 text-center">
+              {{score}}
+            </div>
+            <mat-divider class="push-top"></mat-divider>
+            <div class="push-top body" *ngIf="score <= 3">
+              <p class="mat-body-2">The patient is re-screened at weekly intervals.</p>
+              <p class="push-top-sm tc-grey-800">
+                If the patient e.g. is scheduled for a major operation, a preventive nutritional care plan is considered to avoid the associated
+                risk status.
+              </p>
+            </div>
+            <div class="push-top" *ngIf="score > 3">
+              <p class="text-lg fg-warn">
+                The patient is nutritionally at-risk and a nutritional care plan should be considered.
+              </p>
+            </div>
+
+          </mat-card-content>
+        </mat-card>
+      </div>
+  </app-section-card>
+  <page-actions>
+    <div fxLayout="row" fxAlignItems="center stretch" *ngIf="score >= 0">
+      <span fxFlex></span>
+      <button mat-raised-button color="primary" (click)="reset()" fxFlex="50" fxFlex.lt-sm="100">Restart</button>
+      <span fxFlex></span>
+    </div>
+    <div fxLayout="row" fxAlignItems="center stretch" *ngIf="score < 0">
+      <span fxFlex></span>
+      <button mat-raised-button color="primary" (click)="calc()" fxFlex="50" fxFlex.lt-sm="100" [disabled]="!form.valid">Get Score</button>
+      <span fxFlex></span>
+    </div>
+
+  </page-actions>
+</app-page>

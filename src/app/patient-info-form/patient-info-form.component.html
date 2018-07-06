@@ -1,0 +1,14 @@
+<form>
+
+  <div fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="start stretch">
+    <mat-form-field>
+      <mat-select placeholder="Gender">
+        <mat-option value="M">Male</mat-option>
+        <mat-option value="F">Female</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <app-number-field [form]="form" field="height" placeholder="Height" units="cm"></app-number-field>
+    <app-number-field [form]="form" field="weight" placeholder="Weight" units="kg"></app-number-field>
+    <app-number-field [form]="form" field="profonol" placeholder="profonol" units="mcg/kg/min"></app-number-field>
+  </div>
+</form>

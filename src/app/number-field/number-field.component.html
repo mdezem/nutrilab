@@ -1,0 +1,6 @@
+<mat-form-field [formGroup]="form" *ngIf="!!form">
+  <input matInput type="number"
+   [placeholder] = "placeholder"
+   [formControlName]="field"/>
+  <span matSuffix *ngIf="units && units.length" >{{units}}</span>
+</mat-form-field>

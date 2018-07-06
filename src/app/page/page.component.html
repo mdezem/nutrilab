@@ -1,0 +1,39 @@
+<div [class]="themeClass + ' page'" fxLayout="column" fxLayoutAlign="start stretch">
+  <div fxFlexFill>
+    <div fxLayout="row" fxLayoutAlign="center stretch">
+      <div fxFlex="50" fxFlex.lt-sm="100">
+        <div fxLayout="column" fxLayoutAlign="stretch">
+            <header fxFlex class="page-header">
+                <mat-toolbar color="primary" class="mat-elevation-z6">
+                  <mat-toolbar-row>
+                    <a mat-icon-button arial-label="Back to Previous Page" routerLink="/">
+                      <mat-icon>arrow_back</mat-icon>
+                    </a>
+                    <span>{{ pageTitle }}</span>
+                  </mat-toolbar-row>
+                  <mat-toolbar-row class="page-header-content">
+                    <ng-content select="page-header">
+                    </ng-content>
+                  </mat-toolbar-row>
+                </mat-toolbar>
+            
+              </header>          
+          <main fxFlex="1" class="page-content">
+            <ng-content select="page-body">
+            </ng-content>
+            <ng-content>
+            </ng-content>
+          </main>
+          <footer fxFlex class="page-actions push-top">
+            <ng-content select="page-actions">
+            </ng-content>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer fxFlex class="page-footer push-top">
+    <ng-content select="page-footer">
+    </ng-content>
+  </footer>
+</div>
