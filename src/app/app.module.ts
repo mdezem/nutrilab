@@ -78,7 +78,7 @@ const matModules = [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    FlexLayoutModule.withConfig({ useColumnBasisZero: false }),
+    FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
     ...matModules
