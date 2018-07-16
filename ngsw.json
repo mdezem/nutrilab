@@ -9,10 +9,10 @@
       "urls": [
         "/nutrilab/favicon.ico",
         "/nutrilab/index.html",
-        "/nutrilab/main.8881d20cd2e3a549e99b.js",
+        "/nutrilab/main.233fe2e4b1e49f1682d8.js",
         "/nutrilab/polyfills.2f4a59095805af02bd79.js",
         "/nutrilab/runtime.a66f828dca56eeb90e02.js",
-        "/nutrilab/styles.1949884cfc411c3d4f6a.css"
+        "/nutrilab/styles.1d791ad62837f478c738.css"
       ],
       "patterns": []
     },
@@ -44,11 +44,11 @@
     "/nutrilab/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
     "/nutrilab/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
     "/nutrilab/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
-    "/nutrilab/index.html": "2f72b61ada76e2566e4c87dab6f2b9b3fba20ee4",
-    "/nutrilab/main.8881d20cd2e3a549e99b.js": "b24012ab5e1b0c183de12447e0e8a7c65dc7c4a8",
+    "/nutrilab/index.html": "814915f8c9ab8fec9b9dc764f05d259646559284",
+    "/nutrilab/main.233fe2e4b1e49f1682d8.js": "e1affabce04214c8edd338ed3116375954053663",
     "/nutrilab/polyfills.2f4a59095805af02bd79.js": "8949bb1b1e302dda246f6ed9c2da703270360b1f",
     "/nutrilab/runtime.a66f828dca56eeb90e02.js": "078e320cc6fdaf355836c3b1c52b059cdd33fc7e",
-    "/nutrilab/styles.1949884cfc411c3d4f6a.css": "178173bf1dfcd61f5968192a5ff09272eb7309a1"
+    "/nutrilab/styles.1d791ad62837f478c738.css": "342e9048cc40a022e924df613596e779b51effb1"
   },
   "navigationUrls": [
     {
