@@ -1,0 +1,12 @@
+.formula-details>div {
+  display: block;
+  &>span {
+      font-size: 75%;
+      font-weight: 600;
+      display: block;
+  }
+}
+
+app-formula-info-form {
+    display: block;
+}

@@ -1,0 +1,47 @@
+<app-page pageTitle="Formula Details"          >
+  <app-section-card cardTitle="Basic Information">
+    <form [formGroup]="form">
+      <div fxLayout="column"
+           fxLayoutGap="10px">
+        <mat-form-field>
+          <input matInput
+                 placeholder="Name"
+                 formControlName="name">
+        </mat-form-field>
+
+        <app-number-field [form]="form"
+                          field="kcal"
+                          placeholder="Energy"
+                          units="kcal/ml"></app-number-field>
+        <app-number-field [form]="form"
+                          field="carbs"
+                          placeholder="Carbs"
+                          units="%"></app-number-field>
+        <app-number-field [form]="form"
+                          field="protein"
+                          placeholder="Protein"
+                          units="%"></app-number-field>
+        <app-number-field [form]="form"
+                          field="lipids"
+                          placeholder="Lipids"
+                          units="%"></app-number-field>
+        <app-number-field [form]="form"
+                          field="freeWater"
+                          placeholder="Free Water"
+                          units="%"></app-number-field>
+      </div>
+    </form>
+  </app-section-card>
+  <div page-actions>
+    <div fxLayout="row">
+      <button mat-button
+              fxFlex="50"
+              (click)="form.reset()">Reset</button>
+      <button mat-raised-button
+              fxFlex="50"
+              color="primary"
+              (click)="save()"
+              [disabled]="!form.valid">Save</button>
+    </div>
+  </div>
+</app-page>

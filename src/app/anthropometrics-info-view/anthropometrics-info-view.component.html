@@ -1,0 +1,14 @@
+<mat-list>
+  <mat-list-item *ngFor="let item of items">
+    <div class="mat-list-text"
+         fxFlex="grow">
+      {{item.label}}
+    </div>
+    <span fxFlex="nogrow" class="primary-color" style="min-width: 200px; white-space: nowrap">
+      <span fxFlex
+            *ngIf="!item.text"> {{item.value | number: '1.1-1'}} {{item.unit}}</span>
+      <span fxFlex
+            *ngIf="!!item.text">{{item.text}}</span>
+    </span>
+  </mat-list-item>
+</mat-list>

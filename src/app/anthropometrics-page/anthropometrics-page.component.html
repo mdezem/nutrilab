@@ -1,0 +1,45 @@
+<app-page pageTitle="Anthropometrics">
+  <div page-body
+       *ngIf="!hasResults">
+    <app-section-card cardTitle="Patient Information">
+      <app-patient-info-form [showPropofol]="false"
+                             (valueChanges)="checkValidity()"
+                             #patientInfo>
+      </app-patient-info-form>
+    </app-section-card>
+  </div>
+
+  <div page-body
+       *ngIf="hasResults">
+    <app-section-card cardTitle="Result">
+      <app-anthropometrics-info-view [source]="result">
+      </app-anthropometrics-info-view>
+    </app-section-card>
+  </div>
+
+  <div page-actions>
+    <div *ngIf="!hasResults"
+         fxLayout="row">
+      <button mat-button
+              (click)="reset()"
+              fxFlex="50">Reset</button>
+      <button mat-raised-button
+              fxFlex="50"
+              color="primary"
+              (click)="calc()"
+              [disabled]="!isValid">
+        Calculate
+      </button>
+    </div>
+
+    <div *ngIf="hasResults"
+         fxLayout="row"
+         fxLayoutAlign="center">
+      <button mat-raised-button
+              color="primary"
+              (click)="reset()"
+              fxFlex="50"
+              fxFlex.lt-md="100">Restart</button>
+    </div>
+  </div>
+</app-page>

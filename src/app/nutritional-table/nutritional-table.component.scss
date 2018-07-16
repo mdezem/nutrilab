@@ -1,0 +1,13 @@
+.value-cell {
+  > div {
+    font-weight: 300;
+    font-size: 80%;
+    text-align: right;
+    opacity: .85;
+  }
+
+  > div:first {
+    opacity: 1;
+    font-size: 100%;
+  }
+}

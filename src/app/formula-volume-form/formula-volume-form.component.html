@@ -1,0 +1,16 @@
+<div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px" fxLayoutAlign="center space-between">
+  <mat-form-field fxFlex [formGroup]="form">
+    <mat-select placeholder='Duration' formControlName="duration">
+      <mat-option [value]="24">24 hrs</mat-option>
+      <mat-option [value]="22">22 hrs</mat-option>
+      <mat-option [value]="20">20 hrs</mat-option>
+      <mat-option [value]="18">18 hrs</mat-option>
+      <mat-option [value]="12">12 hrs</mat-option>
+      <mat-option [value]="8">8 hrs</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <app-number-field fxflex [form]="form" field="rate" placeholder="Rate" units="ml/h">
+  </app-number-field>
+  <app-number-field fxFlex [form]="form" field="volume" placeholder="Total Volume" units="ml">
+  </app-number-field>
+</div>

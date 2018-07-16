@@ -61,5 +61,12 @@ Table showing quantities and calories of each macro component, sliced wy the rou
 - Calories = [Formula.Kcal] * {Total Feed}
 
 #### Propofol
-- Lipids (g) = [Propofol] * [Weight] * [Duration] * Math.Pow(10, -6) * 60;
+- total (mg) = [Propofol] * [Weight] * [Duration] * Math.Pow(10, -3) * 60;
+- volume = [total] * 0.1mg/ml
 
+25mcg/kg/min * 80kg * 24hr / 1000
+0.025mg/kg/min * 80kg * 24hr
+2mg/min * (24hr * 60min)
+2mg/min * 1440min = 2880mg
+
+2880mg * 0.1mg/ml = 288ml

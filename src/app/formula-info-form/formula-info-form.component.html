@@ -1,13 +1,42 @@
 <div fxLayout="column" fxLayoutAlign="start stretch">
-  <mat-form-field [formGroup]="form">
+  <mat-form-field [formGroup]="form" fxFlex>
     <mat-select placeholder="Formula" formControlName="formula">
-      <mat-option value="none">None</mat-option>
+      <mat-option value="none">Custom</mat-option>
       <mat-option *ngFor="let formula of formulas | async" [value]="formula.name">{{formula.name}}</mat-option>
     </mat-select>
   </mat-form-field>
-  <app-number-field [form]="form" field="kcal" placeholder="Energy" units="kcal/ml"></app-number-field>
-  <app-number-field [form]="form" field="carbs" placeholder="Carbs" units="%"></app-number-field>
-  <app-number-field [form]="form" field="protein" placeholder="Protein" units="%"></app-number-field>
-  <app-number-field [form]="form" field="lipids" placeholder="Lipids" units="%"></app-number-field>
-  <app-number-field [form]="form" field="freeWater" placeholder="Free Water" units="%"></app-number-field>
+  <mat-expansion-panel #panel *ngIf="form.value.formula !== null" style="box-shadow: 0" [expanded]="showFormulaDetails">
+    <mat-expansion-panel-header [hideToggle]="form.value.formula === 'none'">
+      <div *ngIf="panel.expanded">Formula Details</div>
+      <div *ngIf="!panel.expanded" class="formula-details" fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="center space-between">
+        <div [ngClass]="{ 'warn-color': form.value.kcal == null }">
+          <span>Energy</span>
+          {{form.value.kcal}} kcal/ml
+        </div>
+        <div [ngClass]="{ 'warn-color': form.value.carbs == null }">
+          <span>Carbs</span>
+          {{form.value.carbs}}%
+        </div>
+        <div [ngClass]="{ 'warn-color': form.value.protein == null }">
+          <span>Protein</span>
+          {{form.value.protein}}%
+        </div>
+        <div [ngClass]="{ 'warn-color': form.value.lipids == null }">
+          <span>Lipids</span>
+          {{form.value.lipids}}%
+        </div>
+        <div [ngClass]="{ 'warn-color': form.value.freeWater == null }">
+          <span>Water</span>
+          {{form.value.freeWater}}%
+        </div>
+      </div>
+    </mat-expansion-panel-header>
+    <div fxLayout="column" fxLayoutGap="10px">
+      <app-number-field [form]="form" field="kcal" placeholder="Energy" units="kcal/ml"></app-number-field>
+      <app-number-field [form]="form" field="carbs" placeholder="Carbs" units="%"></app-number-field>
+      <app-number-field [form]="form" field="protein" placeholder="Protein" units="%"></app-number-field>
+      <app-number-field [form]="form" field="lipids" placeholder="Lipids" units="%"></app-number-field>
+      <app-number-field [form]="form" field="freeWater" placeholder="Free Water" units="%"></app-number-field>
+    </div>
+  </mat-expansion-panel>
 </div>

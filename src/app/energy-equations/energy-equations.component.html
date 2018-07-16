@@ -1,5 +1,5 @@
 <app-page pageTitle="Energy Equations" [formGroup]="form">
-  <page-body>
+  <div page-body>
     <app-section-card cardTitle="Patient Information" [fxShow]="!hasResults">
       <div class="param-field">
         <mat-label for="gender">Gender</mat-label>
@@ -48,11 +48,11 @@
         </mat-list-item>
       </mat-list>
     </app-section-card>
-  </page-body>
-  <page-actions fxLayout="row" fxLayoutAlign="center center">
+  </div>
+  <div page-actions fxLayout="row" fxLayoutAlign="center center">
     <button *ngIf="!hasResults" mat-button fxFlex="40" (click)="reset()">Clear</button>
     <button *ngIf="!hasResults" mat-raised-button fxFlex="60" color="primary" (click)="calc()">Calculate</button>
     <button *ngIf="hasResults" mat-button (click)="restart(false)" fxFlex="50">Modify</button>
     <button *ngIf="hasResults" mat-raised-button (click)="restart(true)" fxFlex="50" color="primary">Restart</button>
-  </page-actions>
+  </div>
 </app-page>

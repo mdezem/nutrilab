@@ -1,22 +1,21 @@
 <app-page pageTitle="BMI" class="bmi-page">
-  <page-body [formGroup]="form">
+  <div page-body [formGroup]="form">
     <div class="bmi mat-display-4">
       {{bmi}}
     </div>
     <div class="fields" fxLayout="column" fxLayoutAlign="center stretch">
-      <mat-form-field fxFlex="50" >
-        <input type="number" matInput placeholder="Weight" formControlName="weight">
-        <span matSuffix>Kg</span>
-      </mat-form-field>
-      <mat-form-field fxFlex="50" fxFlex.lt-sm="100">
-        <input type="number" matInput placeholder="Height" formControlName="height">
-        <span matSuffix>Cm</span>
-      </mat-form-field>
+      <form>
+
+        <app-number-field [form]="form" field="height" placeholder="Height" units="Cm">
+        </app-number-field>
+        <app-number-field [form]="form" field="weight" placeholder="Weight" units="Kg">
+        </app-number-field>
+      </form>
     </div>
-  </page-body>
-  <page-actions fxLayout="row" fxLayoutAlign="center stretch">
-    <button mat-raised-button fxFlex="50" fxFlex.lt-sm="100"  color="primary" (click)="calc()">
+  </div>
+  <div page-actions fxLayout="row" fxLayoutAlign="center stretch">
+    <button mat-raised-button fxFlex="50" fxFlex.lt-sm="100" color="primary" (click)="calc()">
       Calculate
     </button>
-  </page-actions>
+  </div>
 </app-page>

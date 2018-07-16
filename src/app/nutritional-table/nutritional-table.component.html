@@ -1,0 +1,40 @@
+<ng-template #valueCell
+             let-text="text"
+             let-value="value"
+             let-kcal="kcal"
+             let-unit="unit"
+             let-ratio="ratio"
+             let-alignRight="alignRight"
+             let-kcalKg="kcalKg">
+  <div class="value-cell">
+    {{text}}
+    <div style="font-size: 80%; margin-right: 5px;">
+      <div *ngIf="value">{{value | number:'1.0-0'}} {{unit || 'gm'}}</div>
+      <div *ngIf="kcal">{{kcal | number: '1.0-0'}} kcal</div>
+      <div *ngIf="ratio">{{ratio | number: '1.0-0'}} %</div>
+      <div *ngIf="kcalKg">
+        <i>{{kcalKg | number: '1.0-0'}} kcal/kg</i>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<table mat-table
+       style="width: 100%"
+       [dataSource]="datasource">
+  <ng-container [matColumnDef]="def.name"
+                *ngFor="let def of columns; let i=index">
+    <th mat-header-cell
+        *matHeaderCellDef>{{def.label}}</th>
+    <td mat-cell
+        *matCellDef="let row">
+      <ng-container *ngTemplateOutlet='valueCellTemplate;context: row[i]'>
+      </ng-container>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row
+      *matHeaderRowDef="visibleColumns"></tr>
+  <tr mat-row
+      *matRowDef="let myRowData; columns: visibleColumns"></tr>
+</table>

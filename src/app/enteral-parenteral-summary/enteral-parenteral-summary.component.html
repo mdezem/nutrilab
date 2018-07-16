@@ -1,146 +1,200 @@
 <app-page pageTitle="E/P Nutrition Summary">
-  <page-body>
-    <mat-vertical-stepper linear="true">
-      <mat-step label="Patient Information">
-        <app-patient-info-form>
-        </app-patient-info-form>
-        <div>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </mat-step>
-      <mat-step label="Enteral Nutrition">
-        <div fxLayout="column" [formGroup]="enteralForm">
-          <app-formula-info-form formulaType="E">
-          </app-formula-info-form>
-          <app-number-field [form]="enteralForm" field="rate" placeholder="Rate" units="ml/h">
-          </app-number-field>
-          <mat-form-field>
-            <mat-select placeholder='Duration' formControlName="duration">
-              <mat-option value="24">24 hrs</mat-option>
-              <mat-option value="22">22 hrs</mat-option>
-              <mat-option value="20">20 hrs</mat-option>
-              <mat-option value="18">18 hrs</mat-option>
-              <mat-option value="12">12 hrs</mat-option>
-              <mat-option value="8">8 hrs</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <div fxLayout="row" fxLayoutGap="15px">
-            <app-number-field [form]="enteralForm" field="freeWater" placeholder="Free water flush" units="ml">
-            </app-number-field>
-            <mat-form-field>
-              <mat-select placeholder="Free Water Flush Rate/Frequency" formControlName="freeWaterUnit">
-                <mat-option value="1">ml/h</mat-option>
-                <mat-option value="2">2hr</mat-option>
-                <mat-option value="4">4hr</mat-option>
-                <mat-option value="6">6hr</mat-option>
-                <mat-option value="8">8hr</mat-option>
-                <mat-option value="12">12hr</mat-option>
-                <mat-option value="24">24hr</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-          <app-number-field [form]="enteralForm" field="protein" placeholder="Protein supplement" units="g/day">
-          </app-number-field>
-          <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext>Next</button>
-          </div>
-
-        </div>
-      </mat-step>
-      <mat-step label="Parenteral Nutrition">
-        <div fxLayout="column" [formGroup]="parenteralForm">
-          <app-number-field [form]="parenteralForm" field="totalVolume" placeholder="Total Volume" units="ml">
-          </app-number-field>
-          <app-number-field [form]="parenteralForm" field="rate" placeholder="Rate" units="ml/h">
-          </app-number-field>
-          <mat-form-field>
-            <mat-select placeholder='Duration' formControlName="duration">
-              <mat-option value="24">24 hrs</mat-option>
-              <mat-option value="22">22 hrs</mat-option>
-              <mat-option value="20">20 hrs</mat-option>
-              <mat-option value="18">18 hrs</mat-option>
-              <mat-option value="12">12 hrs</mat-option>
-              <mat-option value="8">8 hrs</mat-option>
-            </mat-select>
-          </mat-form-field>
-
-          <app-formula-info-form formulaType="P">
-          </app-formula-info-form>
-          <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext>Next</button>
-          </div>
-        </div>
-      </mat-step>
-      <mat-step label="Results">
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button color="accent" matStepperNext>Reset</button>
-        </div>
-      </mat-step>
-    </mat-vertical-stepper>
-    <div style="display: none">
+  <div page-body
+       *ngIf="!hasResults">
+    <form>
       <app-section-card cardTitle="Patient Information">
-        <app-patient-info-form>
+        <app-patient-info-form #patientForm
+                               showPropofol="true">
         </app-patient-info-form>
       </app-section-card>
-      <app-section-card cardTitle="Enteral Nutrition" [formGroup]="enteralForm">
-        <div fxLayout="column">
-          <app-formula-info-form formulaType="E">
-          </app-formula-info-form>
-          <app-number-field [form]="enteralForm" field="rate" placeholder="Rate" units="ml/h">
-          </app-number-field>
-          <mat-form-field>
-            <mat-select placeholder='Duration' formControlName="duration">
-              <mat-option value="24">24 hrs</mat-option>
-              <mat-option value="22">22 hrs</mat-option>
-              <mat-option value="20">20 hrs</mat-option>
-              <mat-option value="18">18 hrs</mat-option>
-              <mat-option value="12">12 hrs</mat-option>
-              <mat-option value="8">8 hrs</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <div fxLayout="row" fxLayoutGap="15px">
-            <app-number-field [form]="enteralForm" field="freeWater" placeholder="Free water flush" units="ml">
+
+      <mat-accordion multi="true">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header class="accent-color">
+            Enteral Nutrition
+          </mat-expansion-panel-header>
+          <div fxLayout="column"
+               [formGroup]="enteralForm">
+            <app-formula-info-form formulaType="E"
+                                   class="push-bottom-2"
+                                   #enteralFormula>
+            </app-formula-info-form>
+            <app-formula-volume-form #enteralVolume>
+            </app-formula-volume-form>
+            <app-number-field [form]="enteralForm"
+                              field="freeWater"
+                              placeholder="Free water flush"
+                              units="ml">
             </app-number-field>
-            <mat-form-field>
-              <mat-select placeholder="Free Water Flush Rate/Frequency" formControlName="freeWaterUnit">
-                <mat-option value="1">ml/h</mat-option>
-                <mat-option value="2">2hr</mat-option>
-                <mat-option value="4">4hr</mat-option>
-                <mat-option value="6">6hr</mat-option>
-                <mat-option value="8">8hr</mat-option>
-                <mat-option value="12">12hr</mat-option>
-                <mat-option value="24">24hr</mat-option>
+            <mat-form-field [formGroup]="enteralForm">
+              <mat-select placeholder="Flush Frequency"
+                          formControlName="freeWaterUnit">
+                <mat-option [value]="1">ml/h (Rate)</mat-option>
+                <mat-option [value]="2">Every 2 hours</mat-option>
+                <mat-option [value]="4">Every 4 hours</mat-option>
+                <mat-option [value]="6">Every 6 hours</mat-option>
+                <mat-option [value]="8">Every 8 hours</mat-option>
+                <mat-option [value]="12">Every 12 hours</mat-option>
+                <mat-option [value]="24">Every 24 hours</mat-option>
               </mat-select>
             </mat-form-field>
+            <app-number-field [form]="enteralForm"
+                              field="protein"
+                              placeholder="Protein supplement"
+                              units="g/day">
+            </app-number-field>
           </div>
-          <app-number-field [form]="enteralForm" field="protein" placeholder="Protein supplement" units="g/day">
-          </app-number-field>
-        </div>
-      </app-section-card>
-      <app-section-card cardTitle="Parenteral Nutrition" [formGroup]="parenteralForm">
-        <div fxLayout="column">
-          <app-number-field [form]="parenteralForm" field="totalVolume" placeholder="Total Volume" units="ml">
-          </app-number-field>
-          <app-number-field [form]="parenteralForm" field="rate" placeholder="Rate" units="ml/h">
-          </app-number-field>
-          <mat-form-field>
-            <mat-select placeholder='Duration' formControlName="duration">
-              <mat-option value="24">24 hrs</mat-option>
-              <mat-option value="22">22 hrs</mat-option>
-              <mat-option value="20">20 hrs</mat-option>
-              <mat-option value="18">18 hrs</mat-option>
-              <mat-option value="12">12 hrs</mat-option>
-              <mat-option value="8">8 hrs</mat-option>
-            </mat-select>
-          </mat-form-field>
+        </mat-expansion-panel>
 
-          <app-formula-info-form formulaType="P">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header class="accent-color">
+            Parenteral Nutrition
+          </mat-expansion-panel-header>
+
+          <app-formula-info-form formulaType="P"
+                                 class="push-bottom-2"
+                                 style="display: block"
+                                 #parenteralFormula>
           </app-formula-info-form>
-        </div>
-      </app-section-card>
+          <app-formula-volume-form #parenteralVolume>
+          </app-formula-volume-form>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </form>
+  </div>
+  <ng-template #valueCell
+               let-value="value"
+               let-kcal="kcal"
+               let-unit="unit"
+               let-ratio="ratio"
+               let-kcalKg="kcalKg">
+    <div style="text-align: right; font-size: 80%; margin-right: 5px;">
+      <div *ngIf="value">{{value | number:'1.0-0'}} {{unit || 'gm'}}</div>
+      <div *ngIf="kcal">{{kcal | number: '1.0-0'}} kcal</div>
+      <div *ngIf="ratio">{{ratio | number: '1.0-0'}} %</div>
+      <div *ngIf="kcalKg">
+        <i>{{kcalKg | number: '1.0-0'}} kcal/kg</i>
+      </div>
     </div>
-  </page-body>
+  </ng-template>
+
+  <div page-body
+       *ngIf="hasResults">
+    <app-section-card cardTitle="Nutritional Components">
+      <h2> Route</h2>
+      <div *ngIf="macroRouteGraphData.data.length > 1">
+        <canvas baseChart
+                chartType='pie'
+                [data]="macroRouteGraphData.data"
+                [labels]="macroRouteGraphData.labels"
+                [options]="{ pieceLabel: { render: 'percentage' } }">
+        </canvas>
+      </div>
+      <!--table mat-table
+             style="width: 100%"
+             [dataSource]="routeComponents">
+        <ng-container matColumnDef="route">
+          <th mat-header-cell
+              *matHeaderCellDef>Route</th>
+          <td mat-cell
+              *matCellDef="let row"> {{row.route}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="kcal">
+          <th mat-header-cell
+              *matHeaderCellDef
+              class="text-right">Energy</th>
+          <td mat-cell
+              *matCellDef="let row">
+            <ng-container *ngTemplateOutlet='valueCell;context: { kcal: row.kcal, ratio: row.ratio, kcalKg: row.kcal_kg}'>
+            </ng-container>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="carbs_g">
+          <th mat-header-cell
+              *matHeaderCellDef
+              class="text-right">Dextrose</th>
+          <td mat-cell
+              *matCellDef="let row">
+            <ng-container *ngTemplateOutlet="valueCell; context: { value: row.carbs_g, kcal: row.carbs_kcal, kcalKg: row.carbs_kcal_kg }"></ng-container>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="protein_g">
+          <th mat-header-cell
+              *matHeaderCellDef
+              class="text-right">Protein</th>
+          <td mat-cell
+              *matCellDef="let row">
+            <ng-container *ngTemplateOutlet="valueCell; context: { value: row.protein_g, kcal: row.protein_kcal, kcalKg: row.protein_kcal_kg}"></ng-container>
+
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="lipids_g">
+          <th mat-header-cell
+              *matHeaderCellDef
+              class="text-right">Lipids</th>
+          <td mat-cell
+              *matCellDef="let row">
+            <ng-container *ngTemplateOutlet="valueCell; context: { value: row.lipids_g, kcal: row.lipids_kcal, kcalKg: row.lipids_kcal_kg }"></ng-container>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row
+            *matHeaderRowDef="routeColumnsToDisplay"></tr>
+        <tr mat-row
+            *matRowDef="let myRowData; columns: routeColumnsToDisplay"></tr>
+      </table-->
+      <app-nutritional-table [columns]="routeTableColumns"
+                             [datasource]="routeTableData">
+      </app-nutritional-table>
+
+      <h2> Macronutrient Distribution </h2>
+
+      <div *ngIf="macroDistGraphData.data.length > 1">
+        <canvas baseChart
+                chartType='pie'
+                [data]="macroDistGraphData.data"
+                [labels]="macroDistGraphData.labels"
+                [options]="{ pieceLabel: { render: 'percentage' } }">
+        </canvas>
+      </div>
+      <app-nutritional-table [datasource]="macroTableData"
+                             [columns]="macroTableColumns">
+      </app-nutritional-table>
+    </app-section-card>
+    <app-section-card cardTitle="Anthropometrics">
+      <app-anthropometrics-info-view [source]="anthropometrics">
+      </app-anthropometrics-info-view>
+    </app-section-card>
+  </div>
+
+  <div page-actions>
+    <div *ngIf="!hasResults"
+         fxLayout="row"
+         fxLayoutAlign="stretch center">
+      <button mat-button
+              (click)="reset()"
+              fxFlex>Reset</button>
+      <button mat-raised-button
+              fxFlex="50"
+              (click)="calc()"
+              color="primary">Calculate</button>
+    </div>
+    <div *ngIf="hasResults"
+         fxLayout="row"
+         fxLayoutAlign="stretch center">
+      <button mat-button
+              (click)="modify()"
+              fxFlex>Modify</button>
+      <button mat-raised-button
+              fxFlex="50"
+              color="accent"
+              (click)="restart()"
+              color="primary">Restart</button>
+    </div>
+
+  </div>
 </app-page>

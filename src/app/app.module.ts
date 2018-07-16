@@ -24,14 +24,15 @@ import {
   MatCheckboxModule,
   MatRadioModule,
   MatSelectModule,
-  MatStepperModule
+  MatStepperModule,
+  MatExpansionModule,
+  MatTableModule
 } from '@angular/material';
 
 import { NutrEquationsService } from './nutr-equations.service';
 import { FormulasService } from './formulas.service';
 import { BMIPageComponent } from './bmipage/bmipage.component';
 import { PageComponent } from './page/page.component';
-import { PageElementsDirective } from './page/elements.directive';
 import { NrsComponent } from './nrs/nrs.component';
 import { EnergyEquationsComponent } from './energy-equations/energy-equations.component';
 import { FormulasComponent } from './formulas/formulas.component';
@@ -41,6 +42,16 @@ import { PatientInfoFormComponent } from './patient-info-form/patient-info-form.
 import { SectionCardComponent } from './section-card/section-card.component';
 import { NumberFieldComponent } from './number-field/number-field.component';
 import { FormulaInfoFormComponent } from './formula-info-form/formula-info-form.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+import { FormulaVolumeFormComponent } from './formula-volume-form/formula-volume-form.component';
+
+import { ChartsModule } from 'ng2-charts';
+import { NutritionalTableComponent } from './nutritional-table/nutritional-table.component';
+import { AnthropometricsInfoViewComponent } from './anthropometrics-info-view/anthropometrics-info-view.component';
+import { AnthropometricsPageComponent } from './anthropometrics-page/anthropometrics-page.component';
+import { FormulaEditFormComponent } from './formulas/edit-form/edit-form.component';
+
 
 const matModules = [
   MatButtonModule,
@@ -54,7 +65,9 @@ const matModules = [
   MatCheckboxModule,
   MatRadioModule,
   MatSelectModule,
-  MatStepperModule
+  MatStepperModule,
+  MatExpansionModule,
+  MatTableModule
 ];
 
 @NgModule({
@@ -63,7 +76,6 @@ const matModules = [
     HomeComponent,
     BMIPageComponent,
     PageComponent,
-    PageElementsDirective,
     NrsComponent,
     EnergyEquationsComponent,
     FormulasComponent,
@@ -73,6 +85,11 @@ const matModules = [
     SectionCardComponent,
     NumberFieldComponent,
     FormulaInfoFormComponent,
+    FormulaVolumeFormComponent,
+    NutritionalTableComponent,
+    AnthropometricsInfoViewComponent,
+    AnthropometricsPageComponent,
+    FormulaEditFormComponent
   ],
   imports: [
     BrowserModule,
@@ -81,7 +98,12 @@ const matModules = [
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
-    ...matModules
+    ChartsModule,
+    ...matModules,
+    ServiceWorkerModule.register('/nutrilab/ngsw-worker.js', {
+      enabled: environment.production,
+      scope: '/nutrilab/'
+    })
   ],
   providers: [FormulasService, NutrEquationsService],
   bootstrap: [AppComponent],

@@ -5,12 +5,16 @@ body {
 }
 
 .mat-select-panel {
-    background-color: #f0f0f0;
-    opacity: 1;
-  }
+  background-color: #f0f0f0;
+  opacity: 1;
+}
 
 .text-center {
   text-align: center;
+}
+
+.text-right {
+  text-align: right !important;
 }
 
 .push-top {
@@ -19,6 +23,10 @@ body {
 
 .push-bottom {
   margin-bottom: 5px;
+}
+
+.push-bottom-2 {
+  margin-bottom: 10px;
 }
 
 /***
@@ -37,7 +45,10 @@ body {
     color: mat-color($primary, 1);
   }
   .accent-color {
-    color: mat-color($accent, 1);
+    color: mat-color($accent, 1) !important;
+  }
+  .warn-color {
+    color: mat-color($warn, 1);
   }
   .primary-bg-color {
     background-color: mat-color($primary, 1);
@@ -52,9 +63,9 @@ body {
   }
 }
 
-$default-theme-primary: mat-palette($mat-blue, 800, 500, 900);
-$default-theme-accent: mat-palette($mat-deep-orange, 600);
-$default-theme-warn: mat-palette($mat-red, A200);
+$default-theme-primary: mat-palette($mat-light-blue, 700, 500, 900);
+$default-theme-accent: mat-palette($mat-deep-orange, A400);
+$default-theme-warn: mat-palette($mat-red, 800);
 // light theme
 $default-light-theme: mat-light-theme( $default-theme-primary, $default-theme-accent, $default-theme-warn);
 .default-light-theme {

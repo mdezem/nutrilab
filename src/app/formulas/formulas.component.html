@@ -1,15 +1,19 @@
 <app-page [pageTitle]="typeName + ' Formulas'">
-  <page-body>
-    <mat-list>
-      <mat-list-item *ngFor="let formula of formulas$ | async" [class]="formula.type">
-        <p matListAvatar>
-          {{formula.type.substring(0, 1)}}
-        </p>
-        <h3 matLine>{{formula.name}}</h3>
+  <div page-body>
+    <mat-nav-list>
+      <a mat-list-item
+         *ngFor="let formula of formulas$ | async"
+         routerLink="/formula/edit"
+         [queryParams]="{ name: formula.name }">
         <p matLine>
-          kcal: {{formula.kcal}}, carbs: {{formula.carbs}}, protein: {{formula.protein}}, lipids: {{formula.lipids}}
+          {{formula.name}}
         </p>
-      </mat-list-item>
-    </mat-list>
-  </page-body>
+        <div matLine
+             style="font-size: 80%; opacity: .8">kcal/ml: {{formula.kcal | number: '1.1-2'}}, carbs: {{formula.carbs | number: '1.1-2'}}, protein: {{formula.protein
+          | number: '1.1-2'}}, lipids: {{formula.lipids | number: '1.1-2'}}, free water: {{formula.freeWater | number: '1.1-2'}}
+        </div>
+        <mat-divider></mat-divider>
+      </a>
+    </mat-nav-list>
+  </div>
 </app-page>

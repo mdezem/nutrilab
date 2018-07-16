@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "debug-server": "ng serve --watch --port 4040",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -23,9 +24,14 @@
     "@angular/material": "^6.3.0",
     "@angular/platform-browser": "^6.0.3",
     "@angular/platform-browser-dynamic": "^6.0.3",
+    "@angular/pwa": "^0.6.8",
     "@angular/router": "^6.0.3",
+    "@angular/service-worker": "^6.0.3",
+    "chart.js": "^2.7.2",
+    "chart.piecelabel.js": "^0.11.0",
     "core-js": "^2.5.4",
     "hammerjs": "^2.0.8",
+    "ng2-charts": "^1.6.0",
     "rxjs": "^6.0.0",
     "zone.js": "^0.8.26"
   },
