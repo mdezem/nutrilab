@@ -2,7 +2,7 @@
   "name": "Nutri Lab",
   "short_name": "Nutri Lab",
   "theme_color": "#0288d1",
-  "background_color": "#fafafa",
+  "background_color": "#0288d1",
   "display": "standalone",
   "scope": "/nutrilab",
   "start_url": "/nutrilab",
