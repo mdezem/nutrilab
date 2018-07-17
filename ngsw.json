@@ -38,8 +38,7 @@
         "/nutrilab/assets/icons/mstile-310x150.png",
         "/nutrilab/assets/icons/mstile-310x310.png",
         "/nutrilab/assets/icons/mstile-70x70.png",
-        "/nutrilab/assets/icons/safari-pinned-tab.svg",
-        "/nutrilab/assets/icons/site.webmanifest"
+        "/nutrilab/assets/icons/safari-pinned-tab.svg"
       ],
       "patterns": []
     }
@@ -64,7 +63,6 @@
     "/nutrilab/assets/icons/mstile-310x310.png": "0d08087b3c644fa9b2088550c3a402b25db506f9",
     "/nutrilab/assets/icons/mstile-70x70.png": "2005e06191c2ea0c640d12533515449cd0dd2d7b",
     "/nutrilab/assets/icons/safari-pinned-tab.svg": "933ac23f6b8741774af3b93913ff183f94e7d7d5",
-    "/nutrilab/assets/icons/site.webmanifest": "296d0afd4f998449ce56ed70ae04840781430365",
     "/nutrilab/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
     "/nutrilab/index.html": "016d55da0d4a00a3133983df1f289bf1a00efa1e",
     "/nutrilab/main.7fddbe6f683bdb31b4fe.js": "d0d4d907b1133ae8576219cfdc18980db31b12c1",
