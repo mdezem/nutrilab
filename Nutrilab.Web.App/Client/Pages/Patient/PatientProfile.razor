@@ -1,0 +1,86 @@
+﻿@page "/patient/{PatientId}"
+@inject IPatientStore PatientStore
+@inject IPatientReportStore PatientReportStore
+
+<h3>Patient Profile</h3>
+
+@if (patient != null)
+{
+    <h4>id: @PatientId</h4>
+    <h4>tag: @patient.Tag</h4>
+
+    <PatientInfoView Patient="@patient" />
+
+    <MudPaper Elevation="1">
+        <h2>Reports</h2>
+        @if (reports != null && reports.Count == 0)
+        {
+            <MudAlert Severity="Severity.Info">No reports found. </MudAlert>
+            <MudLink Color="Color.Primary" Href="@($"/patient/{patient.Id}/reports/new")">New Report</MudLink>
+        }
+        else
+        {
+            <MudTable Items="@reports" Hover="true" Breakpoint="Breakpoint.Sm" Loading="@(reports == null)" LoadingProgressColor="Color.Info">
+                <HeaderContent>
+                    <MudTh>Date</MudTh>
+                    <MudTh>Weight (Kg)</MudTh>
+                    <MudTh>Ventilated?</MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd DataLabel="Created">@context.CreatedAt.ToString("d")</MudTd>
+                    <MudTd DataLabel="Weight">@context.WeightKg</MudTd>
+                    <MudTd DataLabel="Ventilated">@(context.Ventilation == null ? "" : "Yes")</MudTd>
+                </RowTemplate>
+            </MudTable>
+        }
+
+    </MudPaper>
+}
+else
+{
+    <MudAlert Severity="Severity.Info">
+        No patient selected.
+    </MudAlert>
+}
+
+
+@code {
+    [Parameter]
+    public string PatientId { get; set; }
+
+    PatientModel patient;
+    List<PatientReportModel> reports;
+
+    protected async override Task OnParametersSetAsync()
+    {
+        await Task.WhenAll(LoadPatient(), LoadReports());
+    }
+
+    private async Task LoadPatient()
+    {
+        if (String.IsNullOrEmpty(PatientId))
+        {
+            patient = null;
+        }
+        else
+        {
+            var guid = Guid.Parse(PatientId);
+            if (patient == null || patient.Id != guid)
+            {
+                patient = await PatientStore.GetAsync(guid);
+            }
+        }
+    }
+
+    private async Task LoadReports()
+    {
+        if (String.IsNullOrEmpty(PatientId))
+        {
+            reports = null;
+        }
+        else
+        {
+            reports = (await PatientReportStore.GetByPatientId(Guid.Parse(PatientId))).ToList();
+        }
+    }
+}

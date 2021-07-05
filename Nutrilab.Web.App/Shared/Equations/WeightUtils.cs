@@ -1,8 +1,7 @@
-﻿using System;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Nutrilab.Web.App.Shared.Equations.Bmi;
+using System;
 
-namespace Nutrilab.Web.App.Shared.Services.Nutrition
+namespace Nutrilab.Web.App.Shared.Equations
 {
 
   public static class WeightUtils
@@ -38,12 +37,12 @@ namespace Nutrilab.Web.App.Shared.Services.Nutrition
 
     public static double NutritionalBodyWeightKg(Gender gender, BMI bmi)
     {
-      var ideal = IdealBodyWeightKg(gender, bmi.HeightCm);
+      var ideal = IdealBodyWeightKg(gender, bmi.PatientInfo.HeightCm);
 
       // for obese patients
-      if (bmi.Result >= 30)
+      if (bmi.Result.Value >= 30)
       {
-        return ideal + 0.25 * (bmi.WeightKg - ideal);
+        return ideal + 0.25 * (bmi.PatientInfo.WeightKg - ideal);
       }
       return ideal;
     }

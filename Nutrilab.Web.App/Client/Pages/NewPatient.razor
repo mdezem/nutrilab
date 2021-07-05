@@ -1,0 +1,64 @@
+﻿@page "/patient/new"
+@inject ISnackbar Snackbar
+@inject NavigationManager NavManager
+@inject IPatientStore PatientStore
+
+<h3>New Patient</h3>
+
+<EditForm Model="@model" OnValidSubmit="@OnValidSubmit">
+    <DataAnnotationsValidator />
+    <MudCard>
+        <MudCardContent>
+            <MudTextFieldString Label="Tag"
+                                MinLength="5"
+                                MaxLength="32"
+                                Variant="Variant.Outlined"
+                                @bind-Value="model.Tag" />
+
+            <MudNumericField Label="Year of Birth"
+                             Min="1900"
+                             Max="2030"
+                             Variant="Variant.Outlined"
+                             @bind-Value="model.YearOfBirth" />
+
+            <MudNumericField Label="Month of Birth"
+                             Min="1"
+                             Max="12"
+                             Variant="Variant.Outlined"
+                             @bind-Value="model.MonthOfBirth" />
+
+            <MudRadioGroup T="Gender" Required="true" RequiredError="Gender is required!"
+                           @bind-SelectedOption="@model.Gender">
+                <MudRadio Option="@(Gender.Male)">Male</MudRadio>
+                <MudRadio Option="@(Gender.Female)">Female</MudRadio>
+            </MudRadioGroup>
+
+        </MudCardContent>
+        <MudCardActions>
+            <MudButton ButtonType="ButtonType.Submit"
+                       Variant="Variant.Filled"
+                       Color="Color.Primary"
+                       Class="ml-auto">
+                GO
+            </MudButton>
+        </MudCardActions>
+    </MudCard>
+</EditForm>
+
+@code {
+    public PatientModel model { get; } = new PatientModel();
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        model.Id = Guid.NewGuid();
+        model.Tag = PatientModel.GenerateTag();
+    }
+
+    private void OnValidSubmit(EditContext context)
+    {
+        Snackbar.Add("Ok!");
+        PatientStore.AddAsync(model).Wait();
+        NavManager.NavigateTo($"/patient/{model.Id}");
+    }
+}

@@ -1,4 +1,4 @@
-﻿namespace Nutrilab.Web.App.Shared.Services.Nutrition
+﻿namespace Nutrilab.Web.App.Shared.Equations.Energy
 {
   public class EnergyEquationFaisyFagon : EnergyEquationVentilatedPatients
   {
@@ -6,13 +6,15 @@
     {
     }
 
-    protected override double ComputeValue()
+    protected override void ComputeValue(ref EnergyEquationOutput output)
     {
-      return (
-        8 * WeightKg +
-        14 * HeightCm +
-        32 * VentilationLMin +
-        94 * TemperatureMaxC -
+      output ??= new();
+
+      output.ResultKCalDay = (
+        8 * Input.WeightKg +
+        14 * Input.HeightCm +
+        32 * Input.VentilationLMin +
+        94 * Input.TemperatureMaxC -
         4834
       );
     }

@@ -1,0 +1,47 @@
+{
+  "password": {
+    "prototype": "string",
+    "required": true,
+    "minLength": 6
+  },
+  "percent-int": {
+    "prototype": "int",
+    "min": -100,
+    "max": 100
+  },
+  "percent-int-positive": {
+    "prototype": "percent-int",
+    "min": 0,
+    "max": 100
+  },
+  "name": {
+    "prototype": "string",
+    "maxLength": 255,
+    "required": true
+  },
+  "summary": {
+    "prototype": "string",
+    "maxLength": 1024,
+    "required": true
+  },
+  "uri": {
+    "prototype": "string",
+    "format": "uri",
+    "maxLength": 4096
+  },
+  "zipCode": {
+    "prototype": "string",
+    "maxLength": 20
+  },
+  "email": {
+    "prototype": "string",
+    "format": "email",
+    "annotations": {
+      "System.ComponentModel.Annotations.DataType": "Email"
+    }
+  },
+  "text": {
+    "prototype": "string",
+    "maxLength": 65536
+  }
+}

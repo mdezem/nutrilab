@@ -1,4 +1,4 @@
-﻿namespace Nutrilab.Web.App.Shared.Services.Nutrition
+﻿namespace Nutrilab.Web.App.Shared.Equations.Bmi
 {
   public class BmiClassification
   {

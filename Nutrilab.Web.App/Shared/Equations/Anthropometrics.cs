@@ -1,23 +1,26 @@
-﻿using Nutrilab.Web.App.Shared.Equations;
-
-namespace Nutrilab.Web.App.Shared.Services.Nutrition
+﻿namespace Nutrilab.Web.App.Shared.Equations
 {
-  public class Anthropometrics : PatientEquation
+  public class Anthropometrics : PatientEquation<AnthropometricsOutput>
   {
-    public Anthropometrics(PatientInfo patientInfo, string group) : base("Anthropometrics", patientInfo, "General")
+    public Anthropometrics(PatientInfo patientInfo) : base("Anthropometrics", patientInfo, "General")
     {
     }
 
+    protected override void ComputeValue(ref AnthropometricsOutput output)
+    {
+      output ??= new();
+
+      output.IdealBodyWeight = WeightUtils.IdealBodyWeightKg(PatientInfo.Gender, PatientInfo.HeightCm);
+      output.NutritionalBodyWeight = WeightUtils.NutritionalBodyWeightKg(PatientInfo.Gender, Bmi);
+    }
+  }
+
+  public class AnthropometricsOutput
+  {
     public double ActualBodyWeight { get; set; }
     public double IdealBodyWeight { get; set; }
     public double NutritionalBodyWeight { get; set; }
 
-    protected override double ComputeValue()
-    {
-      IdealBodyWeight = WeightUtils.IdealBodyWeightKg(PatientInfo.Gender, Bmi.HeightCm);
-      NutritionalBodyWeight = WeightUtils.NutritionalBodyWeightKg(PatientInfo.Gender, Bmi);
-      return 0;
-    }
   }
 }
 

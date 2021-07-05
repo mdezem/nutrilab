@@ -1,0 +1,46 @@
+﻿@page "/patient/{patientId}/reports/new"
+@inject ISnackbar Snackbar
+@inject NavigationManager NavManager
+@inject IPatientStore PatientStore
+@inject IPatientReportStore PatientReportStore;
+
+<h3>New Patient Report</h3>
+
+<EditForm Model="@model" OnValidSubmit="@OnValidSubmit">
+    <DataAnnotationsValidator />
+    <MudCard>
+        <MudCardContent>
+
+        </MudCardContent>
+        <MudCardActions>
+            <MudButton ButtonType="ButtonType.Submit"
+                       Variant="Variant.Filled"
+                       Color="Color.Primary"
+                       Class="ml-auto">
+                GO
+            </MudButton>
+        </MudCardActions>
+    </MudCard>
+</EditForm>
+
+@code {
+    [Parameter]
+    public string PatientId {get;set;}
+
+    PatientReportModel model = new();
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        model.Id = Guid.NewGuid();
+        model.PatientId = Guid.Parse(PatientId);
+        model.CreatedAt = DateTime.Now;
+    }
+
+    private void OnValidSubmit(EditContext context)
+    {
+        Snackbar.Add("Ok!");
+        PatientReportStore.AddAsync(model).Wait();
+        NavManager.NavigateTo($"/patient/{model.PatientId}/reports/{model.Id}");
+    }
+}

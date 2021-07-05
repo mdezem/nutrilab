@@ -1,27 +1,29 @@
-﻿namespace Nutrilab.Web.App.Shared.Services.Nutrition
+﻿namespace Nutrilab.Web.App.Shared.Equations.Energy
 {
-  public class EnergyEquationHarrisBenedict : EnergyEquation
+  public class EnergyEquationHarrisBenedict : EnergyEquation<EnergyEquationInput, EnergyEquationOutput>
   {
     public EnergyEquationHarrisBenedict(PatientInfo patientInfo) : base("Harris-Benedict", patientInfo, "Energy|General")
     {
     }
 
-    protected override double ComputeValue()
+    protected override void ComputeValue(ref EnergyEquationOutput output)
     {
-      var adjusted_weight = WeightKg;
+      output ??= new();
+
+      var adjusted_weight = Input.WeightKg;
       var idealWeight = 0; // TODO this.idealBodyWeight(gender, height_cm);
-      if (WeightKg > idealWeight * 1.25)
+      if (Input.WeightKg > idealWeight * 1.25)
       {
-        adjusted_weight = idealWeight + 0.25 * (WeightKg - idealWeight);
+        adjusted_weight = idealWeight + 0.25 * (Input.WeightKg - idealWeight);
       }
 
-      if (Gender == Gender.Male)
+      if (Input.Gender == Gender.Male)
       {
-        return 13.75d * HeightCm + 5 * adjusted_weight - 6.8d * AgeYr + 66;
+        output.ResultKCalDay = 13.75d * Input.HeightCm + 5 * adjusted_weight - 6.8d * Input.AgeYr + 66;
       }
       else
       {
-        return 1.8d * HeightCm + 9.6d * adjusted_weight - 4.7d * AgeYr + 655;
+        output.ResultKCalDay = 1.8d * Input.HeightCm + 9.6d * adjusted_weight - 4.7d * Input.AgeYr + 655;
       }
     }
   }

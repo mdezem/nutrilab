@@ -1,4 +1,4 @@
-﻿namespace Nutrilab.Web.App.Shared.Services.Nutrition
+﻿namespace Nutrilab.Web.App.Shared.Equations.Energy
 {
   public class EnergyEquationPennState2003 : EnergyEquationVentilatedPatients
   {
@@ -8,18 +8,24 @@
 
     public override bool Accept()
     {
-      return Bmi.Result < 30 || AgeYr < 60;
+      return Bmi.Result.Value < 30 || Input.AgeYr < 60;
     }
 
-    protected override double ComputeValue()
+    protected override void ComputeValue(ref EnergyEquationOutput output)
     {
+      output ??= new();
+
       var msj = new EnergyEquationMifflinStJeor(PatientInfo);
+
       if (msj.Update())
       {
-        return 0.96 * msj.Result + 167 * TemperatureMaxC + 31 * VentilationLMin - 6212;
+        output.ResultKCalDay =
+          0.96 * msj.Result.ResultKCalDay
+          + 167 * Input.TemperatureMaxC
+          + 31 * Input.VentilationLMin
+          - 6212;
       }
       // todo, add errors
-      return 0;
     }
   }
 }

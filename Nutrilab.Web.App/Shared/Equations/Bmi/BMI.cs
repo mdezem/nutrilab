@@ -1,11 +1,10 @@
-﻿using Nutrilab.Web.App.Shared.Equations;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Nutrilab.Web.App.Shared.Services.Nutrition
+namespace Nutrilab.Web.App.Shared.Equations.Bmi
 {
-  public class BMI : PatientEquation
+  public class BMI : PatientEquation<BMIInput, BMIOutput>
   {
     public static List<BmiClassification> BmiClassifications = new()
     {
@@ -20,7 +19,7 @@ namespace Nutrilab.Web.App.Shared.Services.Nutrition
       new(100, "Obese class III")
     };
 
-    public BMI(PatientInfo patientInfo): base("BMI", patientInfo, "BMI")
+    public BMI(PatientInfo patientInfo) : base("BMI", patientInfo, "BMI")
     {
     }
 
@@ -52,28 +51,29 @@ namespace Nutrilab.Web.App.Shared.Services.Nutrition
       }
     }
 
-    protected override double ComputeValue()
+    protected override void ComputeValue(ref BMIOutput output)
     {
-      var bmi = Math.Round((WeightKg * 10) / (HeightCm / 100d * (HeightCm / 100d)), 1);
+      output ??= new();
 
-      Classification = bmi > 1
+      var bmi = output.Value = Math.Round((Input.WeightKg * 10) / (Input.HeightCm / 100d * (Input.HeightCm / 100d)), 1);
+
+      output.Classification = bmi > 1
         ? BmiClassifications.FirstOrDefault(c => c.MinRange <= bmi && bmi <= c.MaxRange)
         : null;
 
-      if (Classification == null)
+      if (output.Classification == null)
       {
         AddError("Invalid BMI Value");
-        return 0;
       }
-
-      return bmi;
     }
 
-    public BmiClassification Classification { get; private set; }
+  }
 
-    public double HeightCm { get => PatientInfo.HeightCm; }
-    public double WeightKg { get => PatientInfo.WeightKg; }
+  public class BMIOutput
+  {
+    public double Value { get; set; }
 
+    public BmiClassification Classification { get; internal set; }
   }
 }
 

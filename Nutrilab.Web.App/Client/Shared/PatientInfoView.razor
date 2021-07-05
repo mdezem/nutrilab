@@ -1,0 +1,32 @@
+﻿
+<MudPaper Elevation="1">
+    @if (Patient != null)
+    {
+        <MudSimpleTable Dense="true">
+            <tbody>
+                <tr>
+                    <td>Tag</td>
+                    <td>@Patient.Tag</td>
+                </tr>
+                <tr>
+                    <td>Gender</td>
+                    <td>@Patient.Gender</td>
+                </tr>
+                <tr>
+                    <td>Age (years)</td>
+                    <td>@Patient.AgeYr</td>
+                </tr>
+
+            </tbody>
+        </MudSimpleTable>
+    }
+    else
+    {
+        <MudText Color="Color.Info">No patient selected</MudText>
+    }
+</MudPaper>
+
+@code {
+    [Parameter]
+    public PatientModel Patient { get; set; }
+}

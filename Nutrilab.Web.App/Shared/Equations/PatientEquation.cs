@@ -1,15 +1,12 @@
-﻿using Nutrilab.Web.App.Shared.Services.Nutrition;
+﻿using Nutrilab.Web.App.Shared.Equations.Bmi;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Nutrilab.Web.App.Shared.Equations
 {
-  public abstract class PatientEquation 
+  public abstract class PatientEquation<TOutput>
   {
-    public string Name { get; set;  }
+    public string Name { get; set; }
 
     public string Group { get; set; }
 
@@ -17,7 +14,7 @@ namespace Nutrilab.Web.App.Shared.Equations
 
     public BMI Bmi { get; private set; }
 
-    protected PatientEquation (string name, PatientInfo patientInfo, string group)
+    protected PatientEquation(string name, PatientInfo patientInfo, string group)
     {
       Name = name;
       PatientInfo = patientInfo;
@@ -38,18 +35,20 @@ namespace Nutrilab.Web.App.Shared.Equations
       if (Errors.Count > 0)
       {
         State = PatientEquationState.ValiationError;
-        Result = 0;
+        Result = default;
         return false;
       }
 
       if (!Accept())
       {
         State = PatientEquationState.NotApply;
-        Result = 0;
+        Result = default;
         return false;
       }
 
-      Result = ComputeValue();
+      TOutput output = Result;
+      ComputeValue(ref output);
+      Result = output;
       State = PatientEquationState.Ok;
       return true;
     }
@@ -74,15 +73,46 @@ namespace Nutrilab.Web.App.Shared.Equations
       });
     }
 
-    public double Result { get; private set; }
+    public TOutput Result { get; private set; }
 
     public PatientEquationState State { get; private set; }
 
-    protected abstract double ComputeValue();
+    public bool HasErrors { get => State == PatientEquationState.ValiationError; }
+
+    protected abstract void ComputeValue(ref TOutput output);
 
     public virtual bool Validate() => true;
 
     public virtual bool Accept() => true;
 
+  }
+
+  public abstract class PatientEquation<TInput, TOutput> : PatientEquation<TOutput>
+    where TInput : PatientEquationInput
+  {
+    protected PatientEquation(string name, PatientInfo patientInfo, string group) : base(name, patientInfo, group)
+    {
+      Input = (TInput)Activator.CreateInstance(typeof(TInput), new[] { patientInfo });
+    }
+
+    public TInput Input { get; }
+  }
+
+  public class PatientEquationInput
+  {
+    public PatientEquationInput(PatientInfo patientInfo)
+    {
+      PatientInfo = patientInfo;
+    }
+
+    public PatientInfo PatientInfo { get; }
+
+    public Gender Gender { get => PatientInfo.Gender; }
+
+    public double WeightKg { get => PatientInfo.WeightKg; }
+
+    public double HeightCm { get => PatientInfo.HeightCm; }
+
+    public int AgeYr { get => PatientInfo.AgeYr; }
   }
 }

@@ -1,19 +1,9 @@
-﻿using Nutrilab.Web.App.Shared.Equations;
-using System.Collections.Generic;
-
-namespace Nutrilab.Web.App.Shared.Services.Nutrition
+﻿namespace Nutrilab.Web.App.Shared.Equations.Energy
 {
-
-  public abstract class EnergyEquation : PatientEquation
+  public abstract class EnergyEquation<TInput, TOutput> : PatientEquation<TInput, TOutput>
+    where TInput : EnergyEquationInput
+    where TOutput : EnergyEquationOutput
   {
-    public Gender Gender { get => PatientInfo.Gender; }
-
-    public double WeightKg { get => PatientInfo.WeightKg; }
-
-    public double HeightCm { get => PatientInfo.HeightCm; }
-
-    public int AgeYr { get => PatientInfo.AgeYr; }
-
     protected EnergyEquation(string name, PatientInfo patientInfo, string group) : base(name, patientInfo, group)
     {
     }

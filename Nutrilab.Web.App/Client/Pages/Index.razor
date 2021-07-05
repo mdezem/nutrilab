@@ -1,6 +1,19 @@
 ﻿@page "/"
+@inject NavigationManager NavigationManager;
 
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
 
+<MudFab Color="Color.Primary"
+        Icon="@Icons.Material.Filled.Add"
+        aria-label="add"
+        OnClick="@GoToNewPatient"
+        Style="position: fixed; right: 2rem; bottom: 2rem" />
+
+@code {
+    void GoToNewPatient()
+    {
+        NavigationManager.NavigateTo("/patient/new");
+    }
+}

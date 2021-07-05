@@ -1,14 +1,12 @@
-﻿namespace Nutrilab.Web.App.Shared.Services.Nutrition
+﻿namespace Nutrilab.Web.App.Shared.Equations.Energy
 {
-  public abstract class EnergyEquationVentilatedPatients : EnergyEquation
+  public abstract class EnergyEquationVentilatedPatients : EnergyEquation<EnergyEquationVentilatedPatientsInput, EnergyEquationOutput>
   {
     protected EnergyEquationVentilatedPatients(string name, PatientInfo patientInfo, string group = "Energy|Ventilated Patients") : base(name, patientInfo, group)
     {
     }
 
-    public double VentilationLMin { get; set; }
-
-    public double TemperatureMaxC { get; set; }
+    protected abstract override void ComputeValue(ref EnergyEquationOutput output);
 
   }
 }

@@ -1,0 +1,50 @@
+{
+  "string": {
+    "systemType": "System.String",
+    "maxLength": 255,
+    "sqlType": "varchar",
+    "required": false,
+    "customAttributes": {
+      "minLength": "int",
+      "maxLength": "int"
+    }
+  },
+  "int": {
+    "systemType": "System.Int32",
+    "sqlType": "int",
+    "customAttributes": {
+      "min": "int",
+      "max": "int"
+    }
+  },
+  "long": {
+    "systemType": "System.Int64",
+    "sqlType": "bigint",
+    "customAttributes": {
+      "min": "long",
+      "max": "long"
+    }
+  },
+  "double": {
+    "systemType": "System.Double",
+    "sqlType": "numeric(20,5)",
+    "customAttributes": {
+      "min": "double",
+      "max": "double"
+    }
+  },
+  "datetime": {
+    "systemType": "System.DateTime",
+    "sqlType": "DateTime"
+  },
+  "uuid": {
+    "systemType": "System.Guid",
+    "sqlType": "UNIQUEIDENTIFIER"
+  },
+  "timespan": {
+    "systemType": "System.Typespan"
+  },
+  "boolean": {
+    "systemType": "System.Boolean"
+  }
+}
